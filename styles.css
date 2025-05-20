@@ -18,7 +18,11 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: -1;
+}
+
+.stopwatch {
+    color: white;
+    font-size: 20px;
 }
 
 .split {
@@ -35,10 +39,13 @@ body {
     padding-top: 5px;
     padding-bottom: 6px;
     opacity: 0.3;
+    width: 300px;
 }
 
 .split-container-active{
     background-color: greenyellow;
     padding-top: 5px;
     padding-bottom: 6px;
+    width: 310px;
+    border-radius: 0px 10px 10px 0px;
 }
