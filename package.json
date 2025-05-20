@@ -1,0 +1,14 @@
+{
+  "name": "mariotimer",
+  "version": "1.0.0",
+  "description": "Timer for 3D Mario (vectorama)",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jesse, Joni",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^36.2.1"
+  }
+}
