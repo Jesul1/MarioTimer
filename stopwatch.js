@@ -9,7 +9,7 @@ var startTimeAfterPause = Date.now()
 var totalTimePlayed = 0
 
 var timeElapsed = 0
-var timerPaused = false
+var timerPaused = true
 
 var currentGame = 0
 var games = [
@@ -20,6 +20,8 @@ var games = [
     document.getElementById('sm3dw'),
     document.getElementById('smo')
 ]
+
+changeActiveGame()
 
 document.addEventListener('keyup', toggleTimer)
 document.addEventListener('keyup', nextSplit)
@@ -43,6 +45,7 @@ function toggleTimer(event) {
     // spacebar
     if (event.keyCode == 32 || event.pointerType == "mouse") {
         timerPaused = !timerPaused
+        changeTitle()
         if (timerPaused == false) {
             startTimeAfterPause = Date.now() - totalTimePlayed
         } else {
@@ -56,26 +59,36 @@ function previousSplit(event) {
     if (event.keyCode == 8 || event.pointerType == "mouse") {
         if (currentGame > 0) {
             currentGame -= 1
-            changeActiveGame(currentGame)
+            changeActiveGame()
         }
     }
 }
 
 function nextSplit(event) {
     // enter
-    console.log(event)
     if (event.keyCode == 13 || event.pointerType == "mouse") {
         if (currentGame < games.length - 1) {
             currentGame += 1
-            changeActiveGame(currentGame)
+            changeActiveGame()
         }
     }
 }
 
 function changeActiveGame() {
     for (i = 0; i < games.length; i++) {
-        games[i].className = 'split';
+        games[i].className = 'split-container';
     }
     games[currentGame].className = 'split-active'
-    //window.electronAPI.setTitle()
+    changeTitle()
+}
+
+function changeTitle() {
+    var title
+    if (timerPaused) {
+        title = '3D Mario timer | Paused ' + games[currentGame].innerText
+    } else {
+        title = '3D Mario timer | Currently playing ' + games[currentGame].innerText
+    }
+    
+    window.electronAPI.setTitle(title)
 }
