@@ -3,7 +3,13 @@
     color: black;
 }
 
-.splitActive {
+.split-active {
     background-color: #444444;
     color: white;
+}
+
+.split-container{
+    background-color: greenyellow;
+    padding-top: 5px;
+    padding-bottom: 6px;
 }
