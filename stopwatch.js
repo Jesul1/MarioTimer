@@ -78,7 +78,7 @@ function changeActiveGame() {
     for (i = 0; i < games.length; i++) {
         games[i].className = 'split-container';
     }
-    games[currentGame].className = 'split-active'
+    games[currentGame].className = 'split-container-active'
     changeTitle()
 }
 
