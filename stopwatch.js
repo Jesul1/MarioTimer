@@ -1,5 +1,5 @@
-const totalTimeStopwatch = document.getElementById('totalTimeStopwatch')
-const totalGametimeStopwatch = document.getElementById('totalGametimeStopwatch')
+const totalTimeStopwatch = document.getElementById('total-time-stopwatch')
+const totalGametimeStopwatch = document.getElementById('total-gametime-stopwatch')
 //const splitTimeStopwatch = document.getElementById('splitTimeStopwatch')
 
 var startTime = Date.now()
@@ -24,8 +24,8 @@ var games = [
 document.addEventListener('keyup', toggleTimer)
 document.addEventListener('keyup', nextSplit)
 document.addEventListener('keyup', previousSplit)
-document.getElementById('timerToggleButton').onclick = toggleTimer;
-document.getElementById('nextSplitButton').onclick = nextSplit;
+document.getElementById('timer-toggle-button').onclick = toggleTimer;
+document.getElementById('next-split-button').onclick = nextSplit;
 
 setInterval(updateStopwatches, 10)
 
@@ -55,9 +55,8 @@ function previousSplit(event) {
     // backspace
     if (event.keyCode == 8 || event.pointerType == "mouse") {
         if (currentGame > 0) {
-            resetSplitClasses()
             currentGame -= 1
-            games[currentGame].className = 'splitActive'
+            changeActiveGame(currentGame)
         }
     }
 }
@@ -67,15 +66,16 @@ function nextSplit(event) {
     console.log(event)
     if (event.keyCode == 13 || event.pointerType == "mouse") {
         if (currentGame < games.length - 1) {
-            resetSplitClasses()
             currentGame += 1
-            games[currentGame].className = 'splitActive'
+            changeActiveGame(currentGame)
         }
     }
 }
 
-function resetSplitClasses() {
+function changeActiveGame() {
     for (i = 0; i < games.length; i++) {
         games[i].className = 'split';
     }
+    games[currentGame].className = 'split-active'
+    //window.electronAPI.setTitle()
 }
