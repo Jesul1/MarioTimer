@@ -1,0 +1,9 @@
+.split {
+    background-color: white;
+    color: black;
+}
+
+.splitActive {
+    background-color: #444444;
+    color: white;
+}
