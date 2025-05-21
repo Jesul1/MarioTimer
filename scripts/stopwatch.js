@@ -150,15 +150,22 @@ function loadTimesFromStorage() {
 
     console.log(times_json)
 
-    currentGame = times_json['currentGame']
-    startTime = times_json['startTime']
-    totalTimeElapsed = times_json['totalTimeElapsed']
+    // bad fix but whatever
+    try {
+        currentGame = times_json['currentGame']
+        startTime = times_json['startTime']
+        totalTimeElapsed = times_json['totalTimeElapsed']
 
-    for (i = 0; i < games.length; i++) {
-        games[i]['time'] = times_json['gameTimes'][i]
+        for (i = 0; i < games.length; i++) {
+            games[i]['time'] = times_json['gameTimes'][i]
+        }
+
+        console.log('Loaded times')
     }
-
-    console.log('Loaded times')
+    catch {
+        console.log('Saved times corrupted, resetting')
+        resetAllTimes()
+    }
 }
 
 function saveTimesToStorage(close) {
