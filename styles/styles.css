@@ -1,5 +1,5 @@
 body {
-    background-image: url(images/galaxy1.jpg);
+    background-image: url(../images/galaxy1.jpg);
     background-color: white;
     margin: 0px;
     font-family: 'NewRodin';
@@ -7,7 +7,7 @@ body {
 
 @font-face {
     font-family: 'NewRodin';
-    src: url(NewRodin.otf);
+    src: url(../fonts/NewRodin.otf);
 }
 
 .bg-image {

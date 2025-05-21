@@ -1,6 +1,6 @@
 const totalTimeStopwatch = document.getElementById('total-time-stopwatch')
 const totalGametimeStopwatch = document.getElementById('total-gametime-stopwatch')
-const splitTimeStopwatch = document.getElementById('split-time-stopwatch')
+const currentGameStopwatch = document.getElementById('current-game-stopwatch')
 
 var startTime = Date.now()
 var totalTimeElapsed = 0
@@ -13,17 +13,18 @@ var timerPaused = true
 var currentGame = 0
 
 var games = [
-    {"element": document.getElementById('sm64'), "time": 0},
-    {"element": document.getElementById('sms'), "time": 0},
-    {"element": document.getElementById('smg'), "time": 0},
-    {"element": document.getElementById('smg2'), "time": 0},
-    {"element": document.getElementById('sm3dw'), "time": 0},
-    {"element": document.getElementById('smo'), "time": 0}
+    {"time": 0, "startTime": 0, "element": document.getElementById('sm64')},
+    {"time": 0, "startTime": 0, "element": document.getElementById('sms')},
+    {"time": 0, "startTime": 0, "element": document.getElementById('smg')},
+    {"time": 0, "startTime": 0, "element": document.getElementById('smg2')},
+    {"time": 0, "startTime": 0, "element": document.getElementById('sm3dw')},
+    {"time": 0, "startTime": 0, "element": document.getElementById('smo')}
 ]
 
 loadTimesFromStorage()
 changeActiveGame()
 
+// add event listeners for keybinds and buttons
 document.addEventListener('keyup', toggleTimer)
 document.addEventListener('keyup', nextSplit)
 document.addEventListener('keyup', previousSplit)
@@ -33,23 +34,16 @@ document.getElementById('next-split-button').onclick = nextSplit;
 setInterval(updateStopwatches, 10)
 setInterval(saveTimesToStorage, 5000, false)
 
+// event listeners for app menu options
 window.electronAPI.saveTimes((close) => {
     saveTimesToStorage(close)
 })
 
 window.electronAPI.resetTime((game) => {
-    // -1 is total playtime and all games
-    if (game == -1) {
-        totalTimePlayed = 0
-        for (i = 0; i < games.length; i++) {
-            games[i]['time'] = 0
-        }
-    } else {
-        games[game]["time"] = 0
-    }
+    resetTime(game)
 })
 
-window.electronAPI.resetTimes((game) => {
+window.electronAPI.resetTimes(() => {
     resetAllTimes()
 })
 
@@ -57,10 +51,20 @@ function updateStopwatches() {
     totalTimeElapsed = Date.now() - startTime
     if (timerPaused == false) {
         totalTimePlayed = Date.now() - startTimeAfterPause
+
+        games[currentGame]['time'] = Date.now() - games[currentGame]['startTime']
+        console.log(games[currentGame]['time'])
     }
 
+    //totalTimePlayed = games[0]['time'] + games[1]['time'] + games[2]['time'] + games[3]['time'] + games[4]['time'] + games[5]['time']
+    
     totalTimeStopwatch.innerText = (totalTimeElapsed / 1000).toFixed(2)
     totalGametimeStopwatch.innerText = (totalTimePlayed / 1000).toFixed(2)
+    currentGameStopwatch.innerText = (games[currentGame]['time'] / 1000).toFixed(2)
+
+    for (i = 0; i < games.length; i++) {
+        games[i]['element'].querySelector('.split-timer').innerText = (games[i]['time'] / 1000).toFixed(2)
+    }
 }
 
 function toggleTimer(event) {
@@ -70,6 +74,7 @@ function toggleTimer(event) {
         changeTitle()
         if (timerPaused == false) {
             startTimeAfterPause = Date.now() - totalTimePlayed
+            games[currentGame]['startTime'] = Date.now()
         }
     }
 }
@@ -95,6 +100,7 @@ function nextSplit(event) {
 }
 
 function changeActiveGame() {
+    games[currentGame]['startTime'] = Date.now()
     for (i = 0; i < games.length; i++) {
         games[i]['element'].className = 'split-container';
     }
@@ -105,15 +111,28 @@ function changeActiveGame() {
 function changeTitle() {
     var title
     if (timerPaused) {
-        title = '3D Mario timer | Paused ' + games[currentGame]['element'].innerText
+        title = '3D Mario timer | Paused ' + getSplitTitle(games[currentGame]['element'])
     } else {
-        title = '3D Mario timer | Currently playing ' + games[currentGame]['element'].innerText
+        title = '3D Mario timer | Currently playing ' + getSplitTitle(games[currentGame]['element'])
     }
     
     window.electronAPI.setTitle(title)
 }
 
+function resetTime(game) {
+    // -1 is total playtime and all games
+    if (game == -1) {
+        totalTimePlayed = 0
+        for (i = 0; i < games.length; i++) {
+            games[i]['time'] = 0
+        }
+    } else {
+        games[game]["time"] = 0
+    }
+}
+
 function resetAllTimes() {
+    // clear times field from localstorage and close app. resets ALL times
     localStorage.setItem('times', '')
     window.electronAPI.closeApp()
 }
@@ -162,4 +181,13 @@ function saveTimesToStorage(close) {
     }
 
     console.log('Saved times')
+}
+
+function getSplitTitle(element) {
+    title = element.querySelector('.split-title').innerText
+    return(title)
+}
+
+function updateSplitTimer(element, value) {
+    
 }

@@ -6,7 +6,7 @@ const createWindow = () => {
         width: 800,
         height: 600,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js')
+            preload: path.join(__dirname, './scripts/preload.js')
         },
         autoHideMenuBar: true
     })
@@ -65,6 +65,13 @@ const createWindow = () => {
                     click(_item, focusedWindow) {
                         if (focusedWindow) focusedWindow.webContents.toggleDevTools();
                     }
+                },
+                {
+                    label: 'Reload app',
+                    accelerator: 'Control+R',
+                    click(_item, focusedWindow) {
+                        if (focusedWindow) focusedWindow.webContents.reload();
+                    },
                 }
             ]
         }
