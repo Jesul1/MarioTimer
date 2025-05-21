@@ -64,10 +64,15 @@ function toggleTimer(event) {
     // spacebar
     if (event.keyCode == 32 || event.pointerType == "mouse") {
         timerPaused = !timerPaused
-        changeTitle()
         if (timerPaused == false) {
             games[currentGame]['startTime'] = Date.now() - games[currentGame]['time']
+            
+            document.getElementById('timer-toggle-button').innerText = 'Stop timer'
+        } else {
+            document.getElementById('timer-toggle-button').innerText = 'Start timer'
         }
+
+        changeTitle()
     }
 }
 
@@ -100,6 +105,9 @@ function changeActiveGame() {
         games[i]['element'].className = 'split-container';
     }
     games[currentGame]['element'].className = 'split-container-active'
+    
+    document.body.style.backgroundImage = "url('./images/mario" + currentGame.toString() + ".jpg')" 
+    
     changeTitle()
 }
 
