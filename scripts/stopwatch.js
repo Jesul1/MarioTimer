@@ -5,11 +5,7 @@ const currentGameStopwatch = document.getElementById('current-game-stopwatch')
 var startTime = Date.now()
 var totalTimeElapsed = 0
 
-var startTimeAfterPause = Date.now()
-var totalTimePlayed = 0
-
 var timerPaused = true
-
 var currentGame = 0
 
 var games = [
@@ -50,13 +46,10 @@ window.electronAPI.resetTimes(() => {
 function updateStopwatches() {
     totalTimeElapsed = Date.now() - startTime
     if (timerPaused == false) {
-        totalTimePlayed = Date.now() - startTimeAfterPause
-
         games[currentGame]['time'] = Date.now() - games[currentGame]['startTime']
-        console.log(games[currentGame]['time'])
     }
 
-    //totalTimePlayed = games[0]['time'] + games[1]['time'] + games[2]['time'] + games[3]['time'] + games[4]['time'] + games[5]['time']
+    var totalTimePlayed = games.reduce((a, b) => a + b['time'], 0)
     
     totalTimeStopwatch.innerText = (totalTimeElapsed / 1000).toFixed(2)
     totalGametimeStopwatch.innerText = (totalTimePlayed / 1000).toFixed(2)
@@ -73,8 +66,7 @@ function toggleTimer(event) {
         timerPaused = !timerPaused
         changeTitle()
         if (timerPaused == false) {
-            startTimeAfterPause = Date.now() - totalTimePlayed
-            games[currentGame]['startTime'] = Date.now()
+            games[currentGame]['startTime'] = Date.now() - games[currentGame]['time']
         }
     }
 }
@@ -100,7 +92,10 @@ function nextSplit(event) {
 }
 
 function changeActiveGame() {
-    games[currentGame]['startTime'] = Date.now()
+    if (timerPaused == false) {
+        games[currentGame]['startTime'] = Date.now() - games[currentGame]['time']
+    }
+    
     for (i = 0; i < games.length; i++) {
         games[i]['element'].className = 'split-container';
     }
@@ -122,7 +117,6 @@ function changeTitle() {
 function resetTime(game) {
     // -1 is total playtime and all games
     if (game == -1) {
-        totalTimePlayed = 0
         for (i = 0; i < games.length; i++) {
             games[i]['time'] = 0
         }
@@ -151,7 +145,6 @@ function loadTimesFromStorage() {
     currentGame = times_json['currentGame']
     startTime = times_json['startTime']
     totalTimeElapsed = times_json['totalTimeElapsed']
-    totalTimePlayed = times_json['totalTimePlayed']
 
     for (i = 0; i < games.length; i++) {
         games[i]['time'] = times_json['gameTimes'][i]
@@ -170,7 +163,6 @@ function saveTimesToStorage(close) {
         "currentGame": currentGame,
         "startTime": startTime,
         "totalTimeElapsed": totalTimeElapsed,
-        "totalTimePlayed": totalTimePlayed,
         "gameTimes": gameTimes
     }
 

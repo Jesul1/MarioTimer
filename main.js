@@ -40,6 +40,36 @@ const createWindow = () => {
                             click: () => {
                                 win.webContents.send('reset-time', 0)
                             }
+                        },
+                        {
+                            label: 'Super Mario Sunshine',
+                            click: () => {
+                                win.webContents.send('reset-time', 1)
+                            }
+                        },
+                        {
+                            label: 'Super Mario Galaxy',
+                            click: () => {
+                                win.webContents.send('reset-time', 2)
+                            }
+                        },
+                        {
+                            label: 'Super Mario Galaxy 2',
+                            click: () => {
+                                win.webContents.send('reset-time', 3)
+                            }
+                        },
+                        {
+                            label: 'Super Mario 3D World',
+                            click: () => {
+                                win.webContents.send('reset-time', 4)
+                            }
+                        },
+                        {
+                            label: 'Super Mario Odyssey',
+                            click: () => {
+                                win.webContents.send('reset-time', 5)
+                            }
                         }
                     ]
                 },
