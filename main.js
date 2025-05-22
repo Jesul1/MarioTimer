@@ -91,6 +91,13 @@ const createWindow = () => {
             label: 'Dev',
             submenu: [
                 {
+                    label: 'Fullscreen',
+                    accelerator: 'F11',
+                    click: () => {
+                        win.setFullScreen(!win.isFullScreen());
+                    }
+                },
+                {
                     label: 'Toggle devtools',
                     click(_item, focusedWindow) {
                         if (focusedWindow) focusedWindow.webContents.toggleDevTools();
@@ -99,8 +106,8 @@ const createWindow = () => {
                 {
                     label: 'Reload app',
                     accelerator: 'Control+R',
-                    click(_item, focusedWindow) {
-                        if (focusedWindow) focusedWindow.webContents.reload();
+                    click: () => {
+                        win.reload();
                     },
                 }
             ]
