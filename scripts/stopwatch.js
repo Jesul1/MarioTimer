@@ -81,7 +81,7 @@ function toggleTimer(event) {
             document.getElementById('timer-toggle-button').innerText = 'Start timer'
         }
 
-        changeTitle()
+        //changeTitle()
     }
 }
 
@@ -112,12 +112,16 @@ function changeActiveGame() {
     
     for (i = 0; i < games.length; i++) {
         games[i]['element'].className = 'split-container';
+        if (games[i]['element'].querySelector('.banner-container-active') != null){
+            games[i]['element'].querySelector('.banner-container-active').className = 'banner-container'
+        }
     }
     games[currentGame]['element'].className = 'split-container-active'
+    games[currentGame]['element'].querySelector('.banner-container').className = 'banner-container-active'
     //TODO Add game stuff here
     //document.body.style.backgroundImage = "url('./images/mario" + currentGame.toString() + ".jpg')" 
     
-    changeTitle()
+    //changeTitle()
 }
 
 function addDeath(event) {
