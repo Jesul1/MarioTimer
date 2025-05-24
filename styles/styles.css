@@ -49,7 +49,7 @@ body {
     width: 100%;
     height: 200px;
     padding-left: 55px;
-    margin-top: 2vh;
+    margin-top: 5px;
     transition: 1.5s;
     margin-bottom: 280px;
     /* margin-top: calc(-70vh + 40px); */
@@ -72,7 +72,6 @@ body {
                 radial-gradient(ellipse farthest-corner at left top, #fff99e 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
     width: 100%;
     height: 100%;
-    padding-top: 50px;
     z-index: 0;
     position: relative;
 }
@@ -97,25 +96,25 @@ body {
 }
 
 .banner-container{
-    height: 400px;
+    height: 300px;
     width: 100%;
     left: -55px;
     position: relative;
      z-index: -301;
-    transition: 2s;
+    transition: 1.4s;
     opacity: 0%;
     top: 0px;
 }
 
 .banner-container-active{
-    height: 400px;
+    height: 300px;
     width: 100%;
     left: -55px;
-    top: -400px;
+    top: -560px;
     position: relative;
     /* transition: height 2s ease-in-out; */
-     z-index: -301;
-    transition: 2s;
+    z-index: -301;
+    transition: 1.4s;
     opacity: 0%;
 }
 
