@@ -5,20 +5,17 @@
         <title>3D Mario timer</title>
         <link rel="stylesheet" href="./styles/styles.css">
 
-        <link rel="preload" as="image" href="./images/mario0.jpg">
-        <link rel="preload" as="image" href="./images/mario1.jpg">
-        <link rel="preload" as="image" href="./images/mario2.jpg">
-        <link rel="preload" as="image" href="./images/mario3.jpg">
-        <link rel="preload" as="image" href="./images/mario4.jpg">
-        <link rel="preload" as="image" href="./images/mario5.jpg">
     </head>
     <body>
         <div class="bg-image">
             <p class="stopwatch" id="total-time-stopwatch">1</p>
             <p class="stopwatch" id="total-gametime-stopwatch">2</p>
             <p class="stopwatch" id="current-game-stopwatch">3</p>
-            <button type="button" id="timer-toggle-button">Start timer</button>
-            <button type="button" id="next-split-button">Next game</button>
+
+            <div class="stopwatch-container">
+                <button type="button" class="timer-button" id="timer-toggle-button">Start timer</button>
+                <button type="button" class="timer-button" id="next-split-button">Next game</button>
+            </div>
 
             <div class="split-container>" id="sm64">
                 <p class="split-title">Super Mario 64 (co-op)</p>
@@ -48,3 +45,4 @@
     </body>
     <script src="./scripts/stopwatch.js"></script>
 </html>
+

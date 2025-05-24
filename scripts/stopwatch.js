@@ -105,8 +105,8 @@ function changeActiveGame() {
         games[i]['element'].className = 'split-container';
     }
     games[currentGame]['element'].className = 'split-container-active'
-    
-    document.body.style.backgroundImage = "url('./images/mario" + currentGame.toString() + ".jpg')" 
+    //TODO Add game stuff here
+    //document.body.style.backgroundImage = "url('./images/mario" + currentGame.toString() + ".jpg')" 
     
     changeTitle()
 }
