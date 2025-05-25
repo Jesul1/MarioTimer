@@ -34,8 +34,8 @@ body {
     background-color: rgb(22, 22, 22);
     width: 100%;
     height: 180px;
-    transition: 1.5s;
     margin-top: 10px;
+    transition: 800ms;
 }
 
 .split-container-active {
@@ -43,15 +43,26 @@ body {
     background-color: #D60000;
     width: 100%;
     height: 500px;
-    transition: 1.5s;
+    margin-top: 10px;
+    transition: 800ms;
 }
 
-.game-info-container {
+.split-container .game-info-container {
     width: 100%; 
     height: 180px; 
-    background-color: #D60000; 
     position: absolute; 
     bottom: 0px;
+    background-color: rgb(22, 22, 22);
+    transition: 400ms;
+}
+
+.split-container-active .game-info-container {
+    width: 100%; 
+    height: 180px; 
+    position: absolute; 
+    bottom: 0px;
+    background-color: #D60000;
+    transition: 700ms;
 }
 
 .split-container .logo{
