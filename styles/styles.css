@@ -1,5 +1,5 @@
 body {
-    background-color: white;
+    background-color: #D60000;
     margin: 0px;
     font-family: 'NewRodin';
 }
@@ -18,13 +18,118 @@ body {
 
 .stopwatch-container {
     margin-left: 50px;
-    padding-left: 50px;
     margin-top: 2vh;
     border-radius: 25px;
+    margin-bottom: 30px;
+}
+/* CSS */
+.timer-button-pushable {
+  position: relative;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  outline-offset: 4px;
+  transition: filter 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin-left: 30px;
+}
+
+.timer-button-shadow {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: hsl(0deg 0% 0% / 0.25);
+  will-change: transform;
+  transform: translateY(2px);
+  transition:
+    transform
+    600ms
+    cubic-bezier(.3, .7, .4, 1);
+}
+
+.timer-button-edge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background: linear-gradient(
+    to left,
+    hsl(340deg 100% 16%) 0%,
+    hsl(340deg 100% 32%) 8%,
+    hsl(340deg 100% 32%) 92%,
+    hsl(340deg 100% 16%) 100%
+  );
+}
+
+.timer-button-front {
+  display: block;
+  position: relative;
+  padding: 12px 27px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  color: white;
+  background: hsl(345deg 100% 47%);
+  will-change: transform;
+  transform: translateY(-4px);
+  transition:
+    transform
+    600ms
+    cubic-bezier(.3, .7, .4, 1);
+}
+
+@media (min-width: 768px) {
+  .timer-button-front {
+    font-size: 1.25rem;
+    padding: 12px 42px;
+  }
+}
+
+.timer-button-pushable:hover {
+  filter: brightness(110%);
+  -webkit-filter: brightness(110%);
+}
+
+.timer-button-pushable:hover .timer-button-front {
+  transform: translateY(-6px);
+  transition:
+    transform
+    250ms
+    cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.timer-button-pushable:active .timer-button-front {
+  transform: translateY(-2px);
+  transition: transform 34ms;
+}
+
+.timer-button-pushable:hover .timer-button-shadow {
+  transform: translateY(4px);
+  transition:
+    transform
+    250ms
+    cubic-bezier(.3, .7, .4, 1.5);
+}
+
+.timer-button-pushable:active .timer-button-shadow {
+  transform: translateY(1px);
+  transition: transform 34ms;
+}
+
+.timer-button-pushable:focus:not(:focus-visible) {
+  outline: none;
 }
 
 .timer-button{
-    background-color: blueviolet;
+    background: radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
+                radial-gradient(ellipse farthest-corner at left top, #fff99e 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%);
     border-radius: 25px;
     padding: 3 4vw;
 }
