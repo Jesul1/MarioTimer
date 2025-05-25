@@ -35,13 +35,6 @@ body {
     width: 100%;
     height: 180px;
     transition: 1.5s;
-
-    /*
-    padding-top: 30px;
-    padding-bottom: 6px;
-    padding-left: 55px; 
-    margin-top: 5px;
-    */
 }
 
 .split-container-active {
@@ -50,22 +43,6 @@ body {
     width: 100%;
     height: 500px;
     transition: 1.5s;
-}
-
-.split-container-active-old{
-    position: relative;
-    background-color: #D60000;
-    padding-top: 30px;
-    padding-bottom: 6px;
-    width: 100%;
-    height: 200px;
-    padding-left: 55px;
-    margin-top: 5px;
-    transition: 1.5s;
-    margin-bottom: 280px;
-    /* margin-top: calc(-70vh + 40px); */
-    transform: translateY(3in);
-    z-index: 10;
 }
 
 .game-info-container {
@@ -79,18 +56,19 @@ body {
 .split-container .logo{
     position: relative;
     height: 120px;
-    top: -120px;
+    top: -90px;
     left: 10px;
     /* filter: brightness(0%); */
+    transition: 1000ms;
 }
 
 .split-container-active .logo{
     position: relative;
     height: 120px;
-    top: -120px;
+    top: -170px;
     left: 10px;
     /* filter: brightness(100%); */
-    transition: 500ms;
+    transition: 1000ms;
 }
 
 .splits-container{
@@ -110,35 +88,4 @@ body {
 .split-death-counter{
     color: white;
     text-align: center;
-}
-
-.banner-container{
-    height: 300px;
-    width: 100%;
-    left: -55px;
-    position: relative;
-     z-index: -301;
-    transition: 1.4s;
-    opacity: 0%;
-    top: 0px;
-}
-
-.banner-container-active{
-    height: 300px;
-    width: 100%;
-    left: -55px;
-    top: -560px;
-    position: relative;
-    /* transition: height 2s ease-in-out; */
-    z-index: -301;
-    transition: 1.4s;
-    opacity: 0%;
-}
-
-.banner-img{
-    object-fit: cover;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    z-index: -301;
 }
