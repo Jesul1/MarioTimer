@@ -31,11 +31,12 @@ body {
 .timer-container {
     position: sticky;
     top: 0;
-    margin: 30px;
-    border-radius: 25px;
+    width: 100%;
     padding: 20px;
     z-index: 1;
     background-color: black;
+    border: hsl(340deg 100% 32%);
+    border-width: 20px;
 }
 
 .timer-button-pushable {
