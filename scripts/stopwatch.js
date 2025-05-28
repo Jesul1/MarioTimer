@@ -76,9 +76,9 @@ function toggleTimer(event) {
         if (timerPaused == false) {
             games[currentGame]['startTime'] = Date.now() - games[currentGame]['time']
             
-            document.getElementById('timer-toggle-button').innerText = 'Stop timer'
+            document.getElementById('timer-toggle-button').querySelector('.timer-button-front').innerText = 'Stop timer'
         } else {
-            document.getElementById('timer-toggle-button').innerText = 'Start timer'
+            document.getElementById('timer-toggle-button').querySelector('.timer-button-front').innerText = 'Start timer'
         }
 
         //changeTitle()
@@ -114,10 +114,6 @@ function changeActiveGame() {
         games[i]['element'].className = 'split-container';
     }
     games[currentGame]['element'].className = 'split-container-active'
-    //TODO Add game stuff here
-    //document.body.style.backgroundImage = "url('./images/mario" + currentGame.toString() + ".jpg')" 
-    
-    //changeTitle()
 }
 
 function addDeath(event) {

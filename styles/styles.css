@@ -1,3 +1,8 @@
+html {
+  scroll-behavior: smooth;
+}
+
+
 body {
     background-color: rgb(22, 22, 22);
     margin: 0px;
@@ -23,20 +28,14 @@ body {
     padding-left: 25px;
 }
 
-.stopwatch-container {
-    margin-left: 50px;
-    margin-top: 2vh;
-    border-radius: 25px;
-    margin-bottom: 30px;
-    position: relative;
-}
-
 .timer-container {
-    margin-left: 50px;
-    margin-top: 2vh;
+    position: sticky;
+    top: 0;
+    margin: 30px;
     border-radius: 25px;
-    margin-bottom: 30px;
-    position: relative;
+    padding: 20px;
+    z-index: 1;
+    background-color: black;
 }
 
 .timer-button-pushable {
@@ -150,7 +149,7 @@ body {
     padding: 3 4vw;
 }
 
-.split-container{
+.split-container {
     position: relative;
     background-color: rgb(22, 22, 22);
     width: 100%;
