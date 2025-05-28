@@ -91,6 +91,9 @@ function previousSplit(event) {
         if (currentGame > 0) {
             currentGame -= 1
             changeActiveGame()
+
+            // very lazy way to do this but cant be bothered
+            window.scrollBy(0, -180);
         }
     }
 }
@@ -101,6 +104,7 @@ function nextSplit(event) {
         if (currentGame < games.length - 1) {
             currentGame += 1
             changeActiveGame()
+            window.scrollBy(0, 180);
         }
     }
 }
