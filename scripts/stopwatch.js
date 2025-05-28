@@ -76,7 +76,7 @@ function toggleTimer(event) {
         if (timerPaused == false) {
             games[currentGame]['startTime'] = Date.now() - games[currentGame]['time']
             
-            document.getElementById('timer-toggle-button').querySelector('.timer-button-front').innerText = 'Stop timer'
+            document.getElementById('timer-toggle-button').querySelector('.timer-button-front').innerText = 'l l' // lol
         } else {
             document.getElementById('timer-toggle-button').querySelector('.timer-button-front').innerText = 'Start timer'
         }
