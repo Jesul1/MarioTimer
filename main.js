@@ -90,6 +90,13 @@ const createWindow = () => {
             label: 'Dev',
             submenu: [
                 {
+                    label: 'Remove death from current game',
+                    accelerator: '-',
+                    click: () => {
+                        win.webContents.send('remove-death');
+                    }
+                },
+                {
                     label: 'Fullscreen',
                     accelerator: 'F11',
                     click: () => {

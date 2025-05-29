@@ -19,7 +19,7 @@ var games = [
 
 loadTimesFromStorage()
 updateDeathCounters()
-changeActiveGame()
+changeActiveGame(0)
 
 // add event listeners for keybinds and buttons
 document.addEventListener('keyup', toggleTimer)
@@ -47,6 +47,13 @@ window.electronAPI.resetTimes(() => {
     resetAllTimes()
 })
 
+window.electronAPI.removeDeath(() => {
+    if (games[currentGame]['deaths'] > 0) {
+        games[currentGame]['deaths'] -= 1;
+        updateDeathCounters();
+    }
+})
+
 function updateStopwatches() {
     totalTimeElapsed = Date.now() - startTime
     if (timerPaused == false) {
@@ -65,7 +72,7 @@ function updateStopwatches() {
 }
 
 function formatTime(milliseconds) {
-    var time = new Date(milliseconds).toISOString().slice(11, 22);
+    var time = new Date(milliseconds).toISOString().slice(11, 21);
     return(time)
 }
 
@@ -89,10 +96,7 @@ function previousSplit(event) {
     // backspace
     if (event.keyCode == 8 || event.pointerType == "mouse") {
         if (currentGame > 0) {
-            currentGame -= 1
-            changeActiveGame()
-
-            // very lazy way to do this but cant be bothered
+            changeActiveGame(-1)
             window.scrollBy(0, -180);
         }
     }
@@ -102,27 +106,36 @@ function nextSplit(event) {
     // enter
     if (event.keyCode == 13 || event.pointerType == "mouse") {
         if (currentGame < games.length - 1) {
-            currentGame += 1
-            changeActiveGame()
-            window.scrollBy(0, 180);
+            changeActiveGame(1)
+
+            // worst code ever but cant be bothered lol
+            if (currentGame > 1) {
+                window.scrollBy(0, 180);
+            }
         }
     }
 }
 
-function changeActiveGame() {
+function changeActiveGame(direction) {
+    currentGame += direction
     if (timerPaused == false) {
         games[currentGame]['startTime'] = Date.now() - games[currentGame]['time']
     }
     
     for (i = 0; i < games.length; i++) {
         games[i]['element'].className = 'split-container';
+
+        if (i < currentGame) {
+            games[i]['element'].querySelector('.split-timer').style.color = 'chartreuse';
+        }
     }
     games[currentGame]['element'].className = 'split-container-active'
+    games[currentGame]['element'].querySelector('.split-timer').style.color = 'white';
 }
 
 function addDeath(event) {
     // keybind is g temporarily
-    if (event.pointerType == 'mouse' || event.keyCode == 71) {
+    if (event.pointerType == 'mouse' || event.keyCode == 16) {
         games[currentGame]['deaths'] += 1
         updateDeathCounters()
     }

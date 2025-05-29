@@ -4,7 +4,7 @@ todo:
 
 app design:
 icon for app
+change color scheme?
+make scrollbar look nicer
 
-Change split container to green on completed games?
-
-change keybinds
+total deaths counter
