@@ -1,6 +1,7 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 
@@ -10,21 +11,42 @@ body {
     font-family: 'NewRodin';
 }
 
+body::-webkit-scrollbar {
+  background-color: transparent;
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #D60000;
+  border-radius: 15px;
+}
+
 @font-face {
     font-family: 'NewRodin';
     src: url(../fonts/NewRodin.otf);
 }
 
-.stopwatch  {
+.game-time-container, .total-time-container, .total-death-container {
+  margin: 20px;
+}
+
+.total-time-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.stopwatch-container {
+  display: flex;
+}
+
+.stopwatch, .game-stopwatch  {
     color: white;
     font-size: 15px;
     margin: 0;
 }
 
 .game-stopwatch {
-    color: white;
-    font-size: 35px;
-    margin-top: 0;
+  font-size: 35px;
 }
 
 .timer-container {

@@ -1,6 +1,7 @@
 const totalTimeStopwatch = document.getElementById('total-time-stopwatch')
 const totalGametimeStopwatch = document.getElementById('total-gametime-stopwatch')
 const currentGameStopwatch = document.getElementById('current-game-stopwatch')
+const totalDeathsCounter = document.getElementById('total-deaths-counter')
 
 var startTime = Date.now()
 var totalTimeElapsed = 0
@@ -9,12 +10,12 @@ var timerPaused = true
 var currentGame = 0
 
 var games = [
-    {"time": 0, "startTime": 0, "deaths": 0, "element": document.getElementById('sm64')},
-    {"time": 0, "startTime": 0, "deaths": 0, "element": document.getElementById('sms')},
-    {"time": 0, "startTime": 0, "deaths": 0, "element": document.getElementById('smg')},
-    {"time": 0, "startTime": 0, "deaths": 0, "element": document.getElementById('smg2')},
-    {"time": 0, "startTime": 0, "deaths": 0, "element": document.getElementById('sm3dw')},
-    {"time": 0, "startTime": 0, "deaths": 0, "element": document.getElementById('smo')}
+    {"title": "Super Mario 64 (PC co-op)", "time": 0, "startTime": 0, "deaths": 0, "element": document.getElementById('sm64')},
+    {"title": "Super Mario Sunshine (Switch)", "time": 0, "startTime": 0, "deaths": 0, "element": document.getElementById('sms')},
+    {"title": "Super Mario Galaxy (Switch)", "time": 0, "startTime": 0, "deaths": 0, "element": document.getElementById('smg')},
+    {"title": "Super Mario Galaxy 2 (Wii U)", "time": 0, "startTime": 0, "deaths": 0, "element": document.getElementById('smg2')},
+    {"title": "Super Mario 3D World (Wii U)", "time": 0, "startTime": 0, "deaths": 0, "element": document.getElementById('sm3dw')},
+    {"title": "Super Mario Odyssey (Switch)", "time": 0, "startTime": 0, "deaths": 0, "element": document.getElementById('smo')}
 ]
 
 loadTimesFromStorage()
@@ -78,17 +79,21 @@ function formatTime(milliseconds) {
 
 function toggleTimer(event) {
     // spacebar
-    if (event.keyCode == 32 || event.pointerType == "mouse") {
+    if (event.keyCode == 32 || event.pointerType == "mouse" || event == 'manual') {
         timerPaused = !timerPaused
         if (timerPaused == false) {
             games[currentGame]['startTime'] = Date.now() - games[currentGame]['time']
             
             document.getElementById('timer-toggle-button').querySelector('.timer-button-front').innerText = 'l l' // lol
+
+            games[currentGame]['element'].querySelector('.split-timer').style.color = 'white';
+            totalGametimeStopwatch.style.color = 'white';
+            currentGameStopwatch.style.color = 'white';
         } else {
             document.getElementById('timer-toggle-button').querySelector('.timer-button-front').innerText = 'Start timer'
         }
 
-        //changeTitle()
+        changeTitle()
     }
 }
 
@@ -112,6 +117,14 @@ function nextSplit(event) {
             if (currentGame > 1) {
                 window.scrollBy(0, 180);
             }
+        } else {
+            // if next game/enter is pressed on last split, stop timer and make last split timer green
+            toggleTimer('manual');
+            if (timerPaused) {
+                games[currentGame]['element'].querySelector('.split-timer').style.color = 'chartreuse';
+                totalGametimeStopwatch.style.color = 'chartreuse';
+                currentGameStopwatch.style.color = 'chartreuse';
+            }            
         }
     }
 }
@@ -131,6 +144,8 @@ function changeActiveGame(direction) {
     }
     games[currentGame]['element'].className = 'split-container-active'
     games[currentGame]['element'].querySelector('.split-timer').style.color = 'white';
+
+    changeTitle();
 }
 
 function addDeath(event) {
@@ -145,16 +160,17 @@ function updateDeathCounters() {
     for (i = 0; i < games.length; i++) {
         games[i]['element'].querySelector('.split-death-counter').innerText = games[i]['deaths'] + ' deaths'
     }
+
+    var totalDeaths = games.reduce((a, b) => a + b['deaths'], 0);
+    totalDeathsCounter.innerText = totalDeaths;
 }
 
 function changeTitle() {
     var title;
-    // what a nice looking variable!!!!!!!!!!!!!!!!!!!
-    var currentGameTitle = games[currentGame]['element'].querySelector('.split-title').innerText;
     if (timerPaused) {
-        title = '3D Mario timer | Paused ' + currentGameTitle
+        title = '3D Mario timer | Paused ' + games[currentGame]['title'];
     } else {
-        title = '3D Mario timer | Currently playing ' + currentGameTitle
+        title = '3D Mario timer | Currently playing ' + games[currentGame]['title'];
     }
     
     window.electronAPI.setTitle(title)
