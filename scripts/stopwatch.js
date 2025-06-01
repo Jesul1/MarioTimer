@@ -73,8 +73,19 @@ function updateStopwatches() {
 }
 
 function formatTime(milliseconds) {
-    var time = new Date(milliseconds).toISOString().slice(11, 21);
-    return(time)
+    var days = Math.floor(milliseconds / 86400000); // lol
+    var date = new Date(milliseconds);
+
+    var time = "";
+    if (days == 1) {
+        time = days.toString() + " day, ";
+    } else if (days > 0) {
+        time = days.toString() + " days, ";
+    }
+
+    time += date.toISOString().slice(11, 21);
+
+    return(time);
 }
 
 function toggleTimer(event) {
